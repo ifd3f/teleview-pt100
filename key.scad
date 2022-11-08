@@ -325,16 +325,3 @@ module fakeISOEnter(thickness_difference){
         polygon(points=pointArray);
     }
 }
-
-//corollary is shape_hull
-module ISOEnterShapeHull(thickness_difference, depth_difference, modifier){
-    unit = 18.16; // TODO probably not
-		height = 8 - depth_difference;
-		length = 1.5 * unit; // TODO not used. need for dish
-
-    translate([-0.125 * unit, unit*.5]) linear_extrude(height=height*modifier, scale=[.8, .9]){
-        translate([-unit*.5, -unit*1.5]) minkowski(){
-            fakeISOEnter(thickness_difference);
-        }
-    }
-}
