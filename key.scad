@@ -17,7 +17,7 @@ keytop_thickness = 2;
 wall_thickness = 3;
 
 // text to show on the key
-key_text = "↓";
+key_text = "A";
 
 // how deep the key text marking should be
 key_text_depth = .6;
@@ -85,10 +85,10 @@ key_profiles = [
 		18.16,  // Bottom Key Width
 		18.16,  // Bottom Key Height
 		4,   // Top Key Width Difference
-		4,   // Top Key Height Difference
+		3,   // Top Key Height Difference
 		8.5, // total Depth
 		0,  // Top Tilt
-		1.75,// Top Skew
+		1,// Top Skew
 	],
 ];
 
@@ -288,8 +288,8 @@ module key(){
 difference(){
 	key();
     
-    translate([0, (total_key_height - top_total_key_height) / 2, total_depth - key_text_depth]) linear_extrude(height = 10) {
-        text(text = key_text, font = "IBM Plex Mono:style=Bold", size = key_text_fontsize, halign = "center", valign = "center");
+    translate([0, key_height / 2 + top_skew, total_depth - key_text_depth]) linear_extrude(height = 10) {
+        text(text = key_text, font = "IBM Plex Mono", size = key_text_fontsize, halign = "center", valign = "center");
     }
 	// preview cube, for seeing inside the keycap
 	//cube([100,100,100]);

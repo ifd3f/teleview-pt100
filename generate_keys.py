@@ -28,7 +28,7 @@ alpha = [
 SYMS1 = r"""`1234567890-=[]\;',./"""
 SYMS2 = r"""~!@#$%^&*()_+{}|:"<>?"""
 syms = [
-    Key('sym_' + urllib.parse.quote(k, safe=''), f'{k}   {s}', SIZE_1SYM, 1)
+    Key('sym_' + urllib.parse.quote(k, safe=''), f'{k}{s}', SIZE_1SYM, 1)
     for k, s in zip(SYMS1, SYMS2)]
 
 fns = [
@@ -37,26 +37,26 @@ fns = [
 ]
 
 misc = [
-    Key('dial', 'DIAL/DC', SIZE_TEXT, 1.25),
-    Key('exit', 'NSCR/EXIT', SIZE_TEXT, 1.25),
+    Key('misc_dial', 'DIAL/DC', SIZE_TEXT, 1.25),
+    Key('misc_exit', 'EXIT', SIZE_TEXT, 1.25),
 
-    Key('esc', 'LOC/ESC', SIZE_TEXT, 1.25),
-    Key('backspace', 'BSPACE', SIZE_1SYM, 1.25),
+    Key('misc_esc', 'LOC/ESC', SIZE_TEXT, 1.25),
+    Key('misc_backspace', 'BSPACE', SIZE_TEXT, 1.25),
 
-    Key('tab', 'TAB', SIZE_TEXT, 2),
-    Key('clear', 'CLEAR', SIZE_TEXT, 2),
+    Key('misc_tab', 'TAB', SIZE_TEXT, 1.75),
+    Key('misc_clear', 'CLEAR', SIZE_TEXT, 2),
 
-    Key('ctrl', 'CTRL', SIZE_TEXT, 1),
-    Key('alock', 'ALOCK', SIZE_TEXT, 1),
-    Key('return', 'RETURN', SIZE_TEXT, 2),  # temporary ansi-style
+    Key('misc_ctrl', 'CTRL', SIZE_TEXT, 1),
+    Key('misc_alock', 'ALOCK', SIZE_TEXT, 1),
+    Key('misc_return', 'RETURN', SIZE_TEXT, 2),  # temporary ansi-style
 
-    Key('lshift', 'SHIFT', SIZE_TEXT, 2),
-    Key('rshift', 'SHIFT', SIZE_TEXT, 2),
-    Key('del', 'DEL', SIZE_TEXT, 2),
+    Key('misc_lshift', 'SHIFT', SIZE_TEXT, 2),
+    Key('misc_rshift', 'SHIFT', SIZE_TEXT, 2),
+    Key('misc_del', 'DEL', SIZE_TEXT, 2),
 
-    Key('send', 'SEND', SIZE_TEXT, 1.25),
-    Key('print', 'PRINT', SIZE_TEXT, 1.25),
-    Key('space', '', SIZE_1SYM, 6.25),
+    Key('misc_send', 'SEND', SIZE_TEXT, 1.25),
+    Key('misc_print', 'PRINT', SIZE_TEXT, 1.25),
+    Key('misc_space', '', SIZE_1SYM, 6.25),
 
     Key('arrow_u', '↑', SIZE_1SYM, 1),
     Key('arrow_d', '↓', SIZE_1SYM, 1),
@@ -77,7 +77,7 @@ except OSError as e:
 procs = []
 
 for k in all_keys:
-    text_esc = k.text.replace('"', r'\"')
+    text_esc = k.text.replace('"', r'\"').replace('\\', '\\\\')
     cmd = ['openscad', '-o', f'{OUTDIR}/{k.name}.stl', '-D', f'key_length={k.u}', '-D',
            f'key_text="{text_esc}"', '-D', f'key_text_fontsize={k.font_size}', 'key.scad']
     print('Executing command', cmd)
@@ -87,5 +87,5 @@ for p in procs:
     p.wait()
 
 print()
-print('Done!')
+print(f'Finished executing {len(all_keys)} commands!')
 
