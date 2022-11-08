@@ -4,16 +4,26 @@
 
 //length in units of key
 key_length = 1;
-//height in units of key. should remain 1 for most uses
-key_height = 1;
+//height in units of key. This seems to be it from eyeballing it.
+key_height = 0.8;
+
 //keycap type, [0:DCS Row 5, 1:DCS Row 1, 2:DCS Row 2, 3:DCS Row 3, 4:DCS Row 4, 5:DSA Row 3, 6:SA Row 1, 7:SA Row 2, 8:SA Row 3, 9:SA Row 4, 10:DCS Row 4 Spacebar, 11: g20 key (faked)]
 key_profile_index = 0;
 
 // keytop thickness, aka how many millimeters between the inside and outside of the top surface of the key
-keytop_thickness = 1;
+keytop_thickness = 2;
 
 // wall thickness, aka the thickness of the sides of the keycap. note this is the total thickness, aka 3 = 1.5mm walls
 wall_thickness = 3;
+
+// text to show on the key
+key_text = "↓";
+
+// how deep the key text marking should be
+key_text_depth = .6;
+
+// marking font size. 6 works well for characters, 3 works well for dense text
+key_text_fontsize = 6;
 
 /* [Brim] */
 //enable brim for connector
@@ -71,220 +81,14 @@ minkowski_radius = 1.75;
 key_profiles = [
 
 	//DCS Profile
-
-	[ //DCS ROW 5
+	[ // Normal Key
 		18.16,  // Bottom Key Width
 		18.16,  // Bottom Key Height
-		6,   // Top Key Width Difference
-		4,   // Top Key Height Difference
-		11.5, // total Depth
-		-6,  // Top Tilt
-		1.75,// Top Skew
-
-		//Dish Profile
-
-		0,   // Dish Type
-		1,   // Dish Depth
-		0,   // Dish Skew X
-		0    // DIsh Skew Y
-	],
-	[ //DCS ROW 1
-		18.16,  // Bottom Key Width
-		18.16,  // Bottom Key Height
-		6,   // Top Key Width Difference
-		4,   // Top Key Height Difference
-		8.5, // total Depth
-		-1,  // Top Tilt
-		1.75,// Top Skew
-
-		//Dish Profile
-
-		0,   // Dish Type
-		1,   // Dish Depth
-		0,   // Dish Skew X
-		0    // DIsh Skew Y
-	],
-	[ //DCS ROW 2
-		18.16,  // Bottom Key Width
-		18.16,  // Bottom Key Height
-		6.2,   // Top Key Width Difference
-		4,   // Top Key Height Difference
-		7.5, // total Depth
-		3,  // Top Tilt
-		1.75,// Top Skew
-
-		//Dish Profile
-
-		0,   // Dish Type
-		1,   // Dish Depth
-		0,   // Dish Skew X
-		0    // DIsh Skew Y
-	],
-	[ //DCS ROW 3
-		18.16,  // Bottom Key Width
-		18.16,  // Bottom Key Height
-		6,   // Top Key Width Difference
-		4,   // Top Key Height Difference
-		6.2, // total Depth
-		7,  // Top Tilt
-		1.75,// Top Skew
-
-		//Dish Profile
-
-		0,   // Dish Type
-		1,   // Dish Depth
-		0,   // Dish Skew X
-		0    // DIsh Skew Y
-	],
-	[ //DCS ROW 4
-		18.16,  // Bottom Key Width
-		18.16,  // Bottom Key Height
-		6,   // Top Key Width Difference
-		4,   // Top Key Height Difference
-		6.2, // total Depth
-		16,  // Top Tilt
-		1.75,// Top Skew
-
-		//Dish Profile
-
-		0,   // Dish Type
-		1,   // Dish Depth
-		0,   // Dish Skew X
-		0    // DIsh Skew Y
-	],
-
-	//DSA Profile
-
-	[ //DSA ROW 3
-	  18.4,  // Bottom Key Width
-	  18.4,  // Bottom Key Height
-	  5.7, // Top Key Width Difference
-	  5.7, // Top Key Height Difference
-	  7.4, // total Depth
-	  0,   // Top Tilt
-	  0,   // Top Skew
-
-	  //Dish Profile
-
-	  1,   // Dish Type
-	  1.2, // Dish Depth
-	  0,   // Dish Skew X
-	  0    // DIsh Skew Y
-	],
-
-	//SA Proile
-
-	[ //SA ROW 1
-		18.4,  // Bottom Key Width
-	  18.4,  // Bottom Key Height
-	  5.7, // Top Key Width Difference
-	  5.7, // Top Key Height Difference
-	  13.73, // total Depth, fudged
-	  -14,   // Top Tilt
-	  0,   // Top Skew
-
-	  //Dish Profile
-
-	  1,   // Dish Type
-	  1.2, // Dish Depth
-	  0,   // Dish Skew X
-	  0    // DIsh Skew Y
-	],
-	[ //SA ROW 2
-		18.4,  // Bottom Key Width
-	  18.4,  // Bottom Key Height
-	  5.7, // Top Key Width Difference
-	  5.7, // Top Key Height Difference
-	  11.73, // total Depth
-	  -7,   // Top Tilt
-	  0,   // Top Skew
-
-	  //Dish Profile
-
-	  1,   // Dish Type
-	  1.2, // Dish Depth
-	  0,   // Dish Skew X
-	  0    // DIsh Skew Y
-	],
-	[ //SA ROW 3
-		18.4,  // Bottom Key Width
-	  18.4,  // Bottom Key Height
-	  5.7, // Top Key Width Difference
-	  5.7, // Top Key Height Difference
-	  11.73, // total Depth
-	  0,   // Top Tilt
-	  0,   // Top Skew
-
-	  //Dish Profile
-
-	  1,   // Dish Type
-	  1.2, // Dish Depth
-	  0,   // Dish Skew X
-	  0    // DIsh Skew Y
-	],
-	[ //SA ROW 4
-		18.4,  // Bottom Key Width
-	  18.4,  // Bottom Key Height
-	  5.7, // Top Key Width Difference
-	  5.7, // Top Key Height Difference
-	  11.73, // total Depth
-	  7,   // Top Tilt
-	  0,   // Top Skew
-
-	  //Dish Profile
-
-	  1,   // Dish Type
-	  1.2, // Dish Depth
-	  0,   // Dish Skew X
-	  0    // DIsh Skew Y
-	],
-	[ //DCS ROW 4 SPACEBAR
-		18.16,  // Bottom Key Width
-		18.16,  // Bottom Key Height
-		6,   // Top Key Width Difference
-		4,   // Top Key Height Difference
-		6.2, // total Depth
-		16,  // Top Tilt
-		1.75,// Top Skew
-
-		//Dish Profile
-
-		2,   // Dish Type
-		1,   // Dish Depth
-		0,   // Dish Skew X
-		0    // DIsh Skew Y
-	],
-	[ //G20 AKA DCS Row 2 with no dish and shorter
-		18.16,  // Bottom Key Width
-		18.16,  // Bottom Key Height
-		2,   // Top Key Width Difference
-		2,   // Top Key Height Difference
-		6, // total Depth
-		2.5,  // Top Tilt
-		0.75,// Top Skew
-
-		//Dish Profile
-
-		3,   // Dish Type
-		0,   // Dish Depth
-		0,   // Dish Skew X
-		0    // DIsh Skew Y
-	],
-	[ //NONWORKING fake ISO enter
-		18.16 * 1.5,  // Bottom Key Width
-		18.16 * 2,  // Bottom Key Height
 		4,   // Top Key Width Difference
 		4,   // Top Key Height Difference
-		7, // total Depth
+		8.5, // total Depth
 		0,  // Top Tilt
 		1.75,// Top Skew
-
-		//Dish Profile
-
-		0,   // Dish Type
-		1,   // Dish Depth
-		0,   // Dish Skew X
-		0    // DIsh Skew Y
 	],
 ];
 
@@ -300,10 +104,6 @@ height_difference = key_profile[3];
 total_depth = key_profile[4];
 top_tilt = key_profile[5] / key_height;
 top_skew = key_profile[6];
-dish_type = key_profile[7];
-dish_depth = key_profile[8];
-dish_skew_x = key_profile[9];
-dish_skew_y = key_profile[10];
 
 // actual mm key width and height
 total_key_width = bottom_key_width + (unit * (key_length - 1));
@@ -435,25 +235,9 @@ module stabilizer_connectors(has_brim){
 
 //shape related stuff
 
-
-
-
 //general shape of key. used for inside and outside
 module shape(thickness_difference, depth_difference){
-  if (inverted_dish == 1){
-		difference(){
-			union(){
-				shape_hull(thickness_difference, depth_difference, 1);
-				dish(depth_difference);
-			}
-			outside(thickness_difference);
-		}
-	} else{
-		difference(){
-			shape_hull(thickness_difference, depth_difference, 1);
-			dish(depth_difference);
-		}
-	}
+    shape_hull(thickness_difference, depth_difference, 1);
 }
 
 // conicalish clipping shape to trim things off the outside of the keycap
@@ -484,98 +268,6 @@ module shape_hull(thickness_difference, depth_difference, modifier){
 }
 
 
-
-//dish related stuff
-
-
-
-//dish selector
-module dish(depth_difference){
-	if(dish_type == 0){ // cylindrical dish
-		cylindrical_dish(depth_difference);
-	}
-	else if (dish_type == 1) { // spherical dish
-		spherical_dish(depth_difference);
-	}
-	else if (dish_type == 2){ // SIDEWAYS cylindrical dish - used for spacebar
-		sideways_cylindrical_dish(depth_difference);
-	}
-  else if (dish_type == 3){
-  	// no dish
-  }
-}
-
-module cylindrical_dish(depth_difference){
-	/* we do some funky math here
-	 * basically you want to have the dish "dig in" to the keycap x millimeters
-	 * in order to do that you have to solve a small (2d) system of equations
-	 * where the chord of the spherical cross section of the dish is
-	 * the width of the keycap.
-	 */
-	// the distance you have to move the dish up so it digs in dish_depth millimeters
-	chord_length = (pow(top_total_key_width, 2) - 4 * pow(dish_depth, 2)) / (8 * dish_depth);
-	//the radius of the dish
-	rad = (pow(top_total_key_width, 2) + 4 * pow(dish_depth, 2)) / (8 * dish_depth);
-
-	if (inverted_dish == 1){
-		translate([dish_skew_x, top_skew + dish_skew_y, total_depth - depth_difference])
-		rotate([90-top_tilt,0,0])
-		translate([0,-chord_length,0])
-		cylinder(h=100,r=rad, $fn=1024, center=true);
-	}
-	else{
-		translate([dish_skew_x, top_skew + dish_skew_y, total_depth - depth_difference])
-		rotate([90-top_tilt,0,0])
-		translate([0,chord_length,0])
-		cylinder(h=100,r=rad, $fn=1024, center=true);
-	}
-
-}
-
-module spherical_dish(depth_difference){
-	//same thing as the cylindrical dish here, but we need the corners to just touch - so we have to find the hypotenuse of the top
-	chord = pow((pow(top_total_key_width,2) + pow(top_total_key_height, 2)),0.5); //getting diagonal of the top
-
-	// the distance you have to move the dish up so it digs in dish_depth millimeters
-	chord_length = (pow(chord, 2) - 4 * pow(dish_depth, 2)) / (8 * dish_depth);
-	//the radius of the dish
-	rad = (pow(chord, 2) + 4 * pow(dish_depth, 2)) / (8 * dish_depth);
-
-	if (inverted_dish == 1){
-		translate([dish_skew_x, top_skew + dish_skew_y, total_depth - depth_difference])
-		rotate([-top_tilt,0,0])
-		translate([0,0,-chord_length])
-		//NOTE: if your dish is long at all you might need to increase this number
-		sphere(r=rad, $fn=512);
-	}
-	else{
-		translate([dish_skew_x, top_skew + dish_skew_y, total_depth - depth_difference])
-		rotate([-top_tilt,0,0])
-		translate([0,0,chord_length])
-		sphere(r=rad, $fn=256);
-	}
-}
-
-module sideways_cylindrical_dish(depth_difference){
-	chord_length = (pow(top_total_key_height, 2) - 4 * pow(dish_depth, 2)) / (8 * dish_depth);
-	rad = (pow(top_total_key_height, 2) + 4 * pow(dish_depth, 2)) / (8 * dish_depth);
-
-	if (inverted_dish == 1){
-		translate([dish_skew_x, top_skew + dish_skew_y, total_depth - depth_difference])
-		rotate([90,top_tilt,90])
-		translate([0,-chord_length,0])
-		cylinder(h=total_key_width + 20,r=rad, $fn=1024, center=true); // +20 just cuz
-	}
-	else{
-		translate([dish_skew_x, top_skew + dish_skew_y, total_depth - depth_difference])
-		rotate([90,top_tilt,90])
-		translate([0,chord_length,0])
-		cylinder(h=total_key_width + 20,r=rad, $fn=1024, center=true);
-	}
-}
-
-
-
 //actual full key with space carved out and keystem/stabilizer connectors
 module key(){
 	union(){
@@ -595,43 +287,13 @@ module key(){
 // ACTUAL OUTPUT
 difference(){
 	key();
+    
+    translate([0, (total_key_height - top_total_key_height) / 2, total_depth - key_text_depth]) linear_extrude(height = 10) {
+        text(text = key_text, font = "IBM Plex Mono:style=Bold", size = key_text_fontsize, halign = "center", valign = "center");
+    }
 	// preview cube, for seeing inside the keycap
 	//cube([100,100,100]);
 }
-
-//minkowski_key();
-
-
-
-
-// Experimental stuff
-
-
-// key rounded with minkowski sum. still supports wall and keytop thickness.
-// use in actual output section. takes a long time to render with dishes.
-// required for keycap 11, G20 keycap.
-module minkowski_key(){
-	union(){
-		difference(){
-			minkowski(){
-				shape(minkowski_radius*2, minkowski_radius);
-				difference(){
-					sphere(r=minkowski_radius, $fn=24);
-					translate([0,0,-minkowski_radius])
-						cube([2*minkowski_radius,2*minkowski_radius,2*minkowski_radius], center=true);
-				}
-			}
-			shape(wall_thickness, keytop_thickness);
-		}
-	}
-
-	connector(has_brim);
-
-	if (stabilizers == 1){
-		stabilizer_connectors(has_brim);
-	}
-}
-
 
 // NOT 3D, NOT CENTERED
 // corollary is roundedRect
