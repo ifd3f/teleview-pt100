@@ -74,18 +74,38 @@ except OSError as e:
     if e.errno != errno.EEXIST:
         raise
 
-procs = []
+cmds = []
 
 for k in all_keys:
-    text_esc = k.text.replace('"', r'\"').replace('\\', '\\\\')
-    cmd = ['openscad', '-o', f'{OUTDIR}/{k.name}.stl', '-D', f'key_length={k.u}', '-D',
-           f'key_text="{text_esc}"', '-D', f'key_text_fontsize={k.font_size}', 'key.scad']
-    print('Executing command', cmd)
-    procs.append(Popen(cmd))
+    text_esc = ''.join([f'\\x{ord(c):02x}' for c in k.text])
+    base = [
+        'openscad',
+       '-D', f'key_length={k.u}',
+       '-D', f'key_text="{text_esc}"',
+       '-D', f'key_text_fontsize={k.font_size}',
+       'key.scad'
+   ]
+
+    kcp = ['-D', 'output_keycap=true', '-D', 'output_label=false']
+    lcp = ['-D', 'output_keycap=false', '-D', 'output_label=true']
+
+    cmds.append(base + kcp + ['-o', f'{OUTDIR}/{k.name}_label.stl'])
+    cmds.append(base + kcp + ['-o', f'{OUTDIR}/{k.name}_keycap.stl']) 
+
+for c in cmds:
+    print(' '.join(map(repr, c)))
+
+
+procs = []
+for c in cmds:
+    procs.append(Popen(c))
+
 
 for p in procs:
     p.wait()
 
+
 print()
 print(f'Finished executing {len(all_keys)} commands!')
+print('merging')
 

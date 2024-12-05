@@ -1,5 +1,8 @@
 /* Borrowed from https://www.thingiverse.com/thing:468651 */
 
+output_label = false;
+output_keycap = true;
+
 /* [Key] */
 
 //length in units of key
@@ -284,15 +287,25 @@ module key(){
 	}
 }
 
-// ACTUAL OUTPUT
-difference(){
-	key();
-    
-    translate([0, key_height / 2 + top_skew, total_depth - key_text_depth]) linear_extrude(height = 10) {
+module label_part() {
+    translate([0, key_height / 2 + top_skew, total_depth - key_text_depth]) linear_extrude(height = key_text_depth + 0.1) {
         text(text = key_text, font = "IBM Plex Mono", size = key_text_fontsize, halign = "center", valign = "center");
     }
-	// preview cube, for seeing inside the keycap
-	//cube([100,100,100]);
+}
+
+// ACTUAL OUTPUT
+if (output_keycap) {
+    color([25 / 256, 240 / 256, 219 / 256]) difference() {
+        key();
+
+        label_part();
+        // preview cube, for seeing inside the keycap
+        //cube([100,100,100]);
+    }
+}
+
+if (output_label) {
+    color([0, 0, 0]) label_part();
 }
 
 // NOT 3D, NOT CENTERED
