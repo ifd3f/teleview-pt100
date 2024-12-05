@@ -2,6 +2,8 @@
 
 output_label = false;
 output_keycap = true;
+offset_x = 0;
+offset_y = 0;
 
 /* [Key] */
 
@@ -293,19 +295,21 @@ module label_part() {
     }
 }
 
-// ACTUAL OUTPUT
-if (output_keycap) {
-    color([25 / 256, 240 / 256, 219 / 256]) difference() {
-        key();
+translate([offset_x, offset_y, 0]) {
+    // ACTUAL OUTPUT
+    if (output_keycap) {
+        color([25 / 256, 240 / 256, 219 / 256]) difference() {
+            key();
 
-        label_part();
-        // preview cube, for seeing inside the keycap
-        //cube([100,100,100]);
+            label_part();
+            // preview cube, for seeing inside the keycap
+            //cube([100,100,100]);
+        }
     }
-}
 
-if (output_label) {
-    color([0, 0, 0]) label_part();
+    if (output_label) {
+        color([0, 0, 0]) label_part();
+    }
 }
 
 // NOT 3D, NOT CENTERED
